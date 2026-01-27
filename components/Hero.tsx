@@ -187,8 +187,8 @@ const Hero: React.FC = () => {
 
                   <div className="flex-1 flex flex-col overflow-hidden relative">
                      {simStep === 'dashboard' && (
-                       <div className="p-4 sm:p-7 animate-in fade-in slide-in-from-bottom-6 duration-700 h-full flex flex-col fill-mode-both">
-                          <div className="flex justify-between items-center mb-6">
+                       <div className="p-4 sm:p-5 animate-in fade-in slide-in-from-bottom-6 duration-700 h-full flex flex-col fill-mode-both overflow-y-auto scrollbar-hide">
+                          <div className="flex justify-between items-center mb-3">
                              <div className="flex items-center gap-2">
                                 <img src="https://i.imgur.com/tlJh49d.png" className="w-6 h-6 object-contain" alt="mini logo" />
                                 <span className="text-[10px] font-black text-white tracking-widest uppercase">DESVICIAR</span>
@@ -196,7 +196,7 @@ const Hero: React.FC = () => {
                              <div className="px-2 py-0.5 bg-green-500/10 border border-green-500/20 rounded-full text-[7px] font-black tracking-widest text-green-400 uppercase">SISTEMA ATIVO</div>
                           </div>
                           
-                          <div className="bg-white/5 backdrop-blur-md rounded-[1.5rem] p-5 border border-white/10 mb-5 text-left">
+                          <div className="bg-white/5 backdrop-blur-md rounded-[1.5rem] p-5 border border-white/10 mb-2 text-left">
                              <span className="text-[8px] text-gray-500 font-black uppercase tracking-widest block mb-1">STREAK ATUAL</span>
                              <div className="text-2xl font-display font-black text-white mb-3">14 Dias</div>
                              <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
@@ -204,7 +204,7 @@ const Hero: React.FC = () => {
                              </div>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-3 mb-4">
+                          <div className="grid grid-cols-2 gap-3 mb-2">
                              <div className="p-3 bg-white/5 rounded-2xl border border-white/5 text-left">
                                 <Activity size={14} className="text-indigo-400 mb-1" />
                                 <div className="text-base font-black text-white">84%</div>
@@ -217,7 +217,7 @@ const Hero: React.FC = () => {
                              </div>
                           </div>
 
-                          <div className="flex-1 flex flex-col items-center justify-center py-6">
+                          <div className="flex-1 flex flex-col items-center justify-center py-2">
                              <div className="relative group">
                                 <div className="absolute inset-0 bg-purple-600/10 blur-[40px] rounded-full scale-125" />
                                 <div className="relative z-10 p-2 rounded-full border border-white/5 bg-black/40 backdrop-blur-sm shadow-2xl">
@@ -229,7 +229,7 @@ const Hero: React.FC = () => {
                                 </div>
                              </div>
                              
-                             <div className="mt-8 text-center">
+                             <div className="mt-4 text-center">
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-2">
                                    <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
                                    <span className="text-[7px] font-black text-white/60 uppercase tracking-[0.2em]">PROTOCOLADO</span>
@@ -240,7 +240,7 @@ const Hero: React.FC = () => {
 
                           <button 
                             onClick={() => setSimStep('debug')} 
-                            className="mt-auto block w-full py-4 bg-purple-600 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-xl shadow-[0_15px_30px_rgba(147,51,234,0.3)] active:scale-95 transition-all relative z-50 pointer-events-auto"
+                            className="mt-auto block w-full py-4 bg-purple-600 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-xl shadow-[0_15px_30px_rgba(147,51,234,0.3)] active:scale-95 transition-all relative z-50 pointer-events-auto shrink-0 mb-2"
                           >
                              Scanner de Gatilhos
                           </button>
