@@ -3,14 +3,12 @@ import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'dark-outline';
-  size?: 'default' | 'sm';
   fullWidth?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({ 
   children, 
   variant = 'primary', 
-  size = 'default',
   fullWidth = false, 
   className = '', 
   ...props 
@@ -25,10 +23,10 @@ const Button: React.FC<ButtonProps> = ({
     ghost: "text-gray-400 hover:text-white bg-transparent hover:bg-white/5"
   };
 
-  const sizes = size === 'sm' ? "py-2.5 px-6 text-[10px]" : "py-4 lg:py-6 text-[11px] sm:text-xs";
+  const sizes = "py-4 lg:py-6 text-[11px] sm:text-xs";
   const widthClass = fullWidth ? "w-full" : "";
 
-  // Mapeamento da chave da variante devido à diferença de hífen vs underscore nos objetos JS
+  // Mapping the variant key because of the hyphen vs underscore difference in JS objects
   const variantClass = variant === 'dark-outline' ? variants.dark_outline : variants[variant as keyof typeof variants];
 
   return (
