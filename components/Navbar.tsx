@@ -40,9 +40,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 will-change-transform ${
         scrolled 
-          ? 'bg-black/80 backdrop-blur-2xl border-b border-white/5 py-2' 
+          ? 'bg-black/80 backdrop-blur-md border-b border-white/5 py-2' 
           : 'bg-transparent py-4 lg:py-8'
       }`}
     >

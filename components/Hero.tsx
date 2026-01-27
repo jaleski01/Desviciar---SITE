@@ -6,27 +6,30 @@ import {
   Smartphone, Home, Moon, BookOpen, Users, LayoutGrid,
   Zap, ChevronRight, BarChart3, Heart, Star,
   Signal, Wifi, Battery, User, AlertCircle, LogOut, ChevronDown, Award,
-  Wind, Droplets, Flame, ShieldAlert, CheckCircle2, TrendingUp, Timer, Binary, Target
+  Wind, Droplets, Flame, ShieldAlert, CheckCircle2, TrendingUp, Timer, Binary, Target, Volume2, VolumeX
 } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [simStep, setSimStep] = useState<'dashboard' | 'debug' | 'loading' | 'response' | 'profile' | 'evolution' | 'breathing'>('dashboard');
   const [selectedTrigger, setSelectedTrigger] = useState('');
   const [breathPhase, setBreathPhase] = useState<'Inspire...' | 'Segure...' | 'Expire...'>('Inspire...');
+  const [isAudioStarted, setIsAudioStarted] = useState(false);
   
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const noiseNodeRef = useRef<AudioNode | null>(null);
+  const noiseSourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
 
   const scrollToPlans = () => {
     const el = document.querySelector('#planos');
     el?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    if (simStep === 'breathing') {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  const startWhiteNoise = async () => {
+    try {
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const ctx = new AudioContextClass();
       audioCtxRef.current = ctx;
-      
+
       const bufferSize = 2 * ctx.sampleRate;
       const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
       const output = noiseBuffer.getChannelData(0);
@@ -44,28 +47,55 @@ const Hero: React.FC = () => {
 
       const gain = ctx.createGain();
       gain.gain.value = 0.05;
+      gainNodeRef.current = gain;
 
       whiteNoise.connect(filter);
       filter.connect(gain);
       gain.connect(ctx.destination);
       
       whiteNoise.start();
-      noiseNodeRef.current = whiteNoise;
+      noiseSourceRef.current = whiteNoise;
+      setIsAudioStarted(true);
 
-      const interval = setInterval(() => {
+      // Safari requirement: resume context on click
+      if (ctx.state === 'suspended') {
+        await ctx.resume();
+      }
+    } catch (e) {
+      console.error("Audio initialization blocked or failed:", e);
+    }
+  };
+
+  const stopWhiteNoise = () => {
+    if (noiseSourceRef.current) {
+      try {
+        noiseSourceRef.current.stop();
+      } catch (e) {}
+      noiseSourceRef.current = null;
+    }
+    if (audioCtxRef.current) {
+      audioCtxRef.current.close();
+      audioCtxRef.current = null;
+    }
+    setIsAudioStarted(false);
+  };
+
+  useEffect(() => {
+    let interval: number | undefined;
+    if (simStep === 'breathing') {
+      interval = window.setInterval(() => {
         setBreathPhase(prev => {
           if (prev === 'Inspire...') return 'Segure...';
           if (prev === 'Segure...') return 'Expire...';
           return 'Inspire...';
         });
       }, 4000);
-
-      return () => {
-        clearInterval(interval);
-        whiteNoise.stop();
-        ctx.close();
-      };
     }
+
+    return () => {
+      if (interval) clearInterval(interval);
+      stopWhiteNoise();
+    };
   }, [simStep]);
 
   const triggers = [
@@ -95,11 +125,13 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero-simulator" className="relative pt-24 pb-12 lg:pt-48 lg:pb-32 overflow-hidden bg-[#020408]">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-purple-600/15 rounded-full blur-[120px] sm:blur-[180px] animate-pulse-slow" />
-      </div>
-
+    <section 
+      id="hero-simulator" 
+      className="relative pt-24 pb-12 lg:pt-48 lg:pb-32 overflow-hidden bg-[#020408]"
+      style={{
+        backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 70%)'
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         <div className="flex flex-col items-center text-center">
           
@@ -187,7 +219,7 @@ const Hero: React.FC = () => {
 
                           <div className="flex-1 flex flex-col items-center justify-center py-6">
                              <div className="relative group">
-                                <div className="absolute inset-0 bg-purple-600/30 blur-[40px] rounded-full scale-125 animate-pulse-slow" />
+                                <div className="absolute inset-0 bg-purple-600/10 blur-[40px] rounded-full scale-125" />
                                 <div className="relative z-10 p-2 rounded-full border border-white/5 bg-black/40 backdrop-blur-sm shadow-2xl">
                                    <img 
                                      src="https://i.imgur.com/tlJh49d.png" 
@@ -283,7 +315,26 @@ const Hero: React.FC = () => {
                                 {breathPhase === 'Inspire...' ? 'INSPIRE...' : breathPhase === 'Segure...' ? 'SEGURE...' : 'EXPIRE...'}
                              </span>
                           </div>
-                          <p className="text-[9px] text-gray-500 font-medium mb-10 text-center uppercase tracking-widest">Protocolo SOS Ativo.</p>
+                          
+                          <div className="flex flex-col items-center gap-4">
+                            {!isAudioStarted ? (
+                              <button 
+                                onClick={startWhiteNoise}
+                                className="flex items-center gap-3 px-6 py-3 bg-purple-600/20 border border-purple-500/30 rounded-xl text-purple-400 text-[10px] font-black uppercase tracking-widest hover:bg-purple-600/30 transition-all"
+                              >
+                                <Volume2 size={14} /> Ativar Som SOS
+                              </button>
+                            ) : (
+                              <button 
+                                onClick={stopWhiteNoise}
+                                className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-gray-500 text-[10px] font-black uppercase tracking-widest"
+                              >
+                                <VolumeX size={14} /> Mutar
+                              </button>
+                            )}
+                            <p className="text-[9px] text-gray-500 font-medium text-center uppercase tracking-widest">Protocolo SOS Ativo.</p>
+                          </div>
+
                           <button onClick={() => setSimStep('debug')} className="mt-8 text-[8px] font-black text-gray-600 uppercase tracking-widest hover:text-white transition-colors">Voltar ao Scanner</button>
                        </div>
                      )}
@@ -353,7 +404,7 @@ const Hero: React.FC = () => {
                   </div>
                </div>
             </div>
-            <div className={`absolute -inset-10 bg-purple-600/10 blur-[100px] -z-10 rounded-full transition-opacity duration-1000 ${simStep === 'breathing' ? 'opacity-20' : 'opacity-100'}`} />
+            <div className="absolute -inset-10 bg-purple-600/5 blur-[100px] -z-10 rounded-full opacity-100 pointer-events-none" />
           </div>
         </div>
       </div>

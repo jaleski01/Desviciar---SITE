@@ -120,7 +120,7 @@ export const PLANS: Plan[] = [
       "Masterclasses Vitalícias"
     ],
     cta: "GARANTIR NEW LIFE",
-    checkoutUrl: "https://buy.stripe.com/6oUaEQ5Kl7fw3wHgLSbjW08"
+    checkoutUrl: "https://buy.stripe.com/9B6eV68Wx0R8gjtbrybjW0b"
   }
 ];
 
