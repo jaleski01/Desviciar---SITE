@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Scan } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Button from './Button';
 
 interface NavbarProps {
@@ -36,10 +36,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
         el?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
-  };
-
-  const openScanner = () => {
-    window.location.href = '/scanner';
   };
 
   return (
@@ -87,19 +83,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
           </div>
 
           <div className="hidden lg:flex items-center gap-6">
-            <button 
-              onClick={openScanner}
-              className="flex items-center gap-2 text-[12px] font-bold text-gray-400 hover:text-white transition-colors"
-            >
-              <Scan size={16} />
-              Scanner de Gatilhos
-            </button>
             <a href="#" className="text-[12px] font-bold text-gray-400 hover:text-white transition-colors">
               Login
             </a>
             <Button 
               variant="dark-outline"
               className="h-10 px-6 text-[10px] font-black rounded-xl border-white/10 hover:border-purple-500/50"
+              onClick={() => {
+                const el = document.querySelector('#planos');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Começar agora
             </Button>
@@ -121,8 +114,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
           isOpen ? 'translate-x-0' : 'translate-x-full pointer-events-none'
         }`}
       >
-        <div className="px-8 py-12 flex flex-col h-full overflow-y-auto">
-          <div className="space-y-4 mb-8">
+        <div className="px-8 py-12 flex flex-col h-full">
+          <div className="space-y-4">
             {navLinks.map((link) => (
                <button 
                  key={link.name}
@@ -134,23 +127,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
                  {link.name}
                </button>
             ))}
-          </div>
-          
-          <div className="flex flex-col gap-4 mt-auto pb-12">
-            <button 
-              onClick={openScanner}
-              className="flex items-center justify-center gap-3 w-full py-6 text-xl font-display font-black text-red-400 border-b border-white/5"
-            >
-              <Scan size={24} />
-              SCANNER DE GATILHOS
-            </button>
-            <Button 
-              variant="secondary"
-              fullWidth
-              className="py-6"
-            >
-              Começar agora
-            </Button>
           </div>
         </div>
       </div>
