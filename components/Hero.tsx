@@ -187,7 +187,7 @@ const Hero: React.FC = () => {
 
                   <div className="flex-1 flex flex-col overflow-hidden relative">
                      {simStep === 'dashboard' && (
-                       <div className="p-5 sm:p-7 animate-in fade-in slide-in-from-bottom-6 duration-700 h-full flex flex-col fill-mode-both">
+                       <div className="p-4 sm:p-7 animate-in fade-in slide-in-from-bottom-6 duration-700 h-full flex flex-col fill-mode-both">
                           <div className="flex justify-between items-center mb-6">
                              <div className="flex items-center gap-2">
                                 <img src="https://i.imgur.com/tlJh49d.png" className="w-6 h-6 object-contain" alt="mini logo" />
@@ -238,7 +238,10 @@ const Hero: React.FC = () => {
                              </div>
                           </div>
 
-                          <button onClick={() => setSimStep('debug')} className="mt-auto w-full py-4 bg-purple-600 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-xl shadow-[0_15px_30px_rgba(147,51,234,0.3)] active:scale-95 transition-all">
+                          <button 
+                            onClick={() => setSimStep('debug')} 
+                            className="mt-auto block w-full py-4 bg-purple-600 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-xl shadow-[0_15px_30px_rgba(147,51,234,0.3)] active:scale-95 transition-all relative z-50 pointer-events-auto"
+                          >
                              Scanner de Gatilhos
                           </button>
                        </div>
