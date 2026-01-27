@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Zap } from 'lucide-react';
 import Button from './Button';
 
 interface NavbarProps {
@@ -36,6 +36,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
         el?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
+  };
+
+  const openScanner = () => {
+    window.open('https://scanner.desviciar.com.br', '_blank');
   };
 
   return (
@@ -82,7 +86,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:text-red-300 flex"
+              onClick={openScanner}
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              SCANNER DE GATILHOS
+            </Button>
             <a href="#" className="text-[12px] font-bold text-gray-400 hover:text-white transition-colors">
               Login
             </a>
@@ -94,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
             </Button>
           </div>
 
-          <div className="flex lg:hidden items-center gap-4">
+          <div className="flex md:hidden items-center gap-4">
              <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-3 rounded-2xl text-white bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
@@ -106,12 +119,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
       </div>
 
       <div 
-        className={`lg:hidden fixed inset-0 top-[80px] bg-[#020408]/98 backdrop-blur-3xl transition-all duration-500 ease-in-out ${
+        className={`md:hidden fixed inset-0 top-[80px] bg-[#020408]/98 backdrop-blur-3xl transition-all duration-500 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full pointer-events-none'
         }`}
       >
-        <div className="px-8 py-12 flex flex-col h-full">
-          <div className="space-y-4">
+        <div className="px-8 py-12 flex flex-col h-full overflow-y-auto">
+          <div className="space-y-4 mb-8">
             {navLinks.map((link) => (
                <button 
                  key={link.name}
@@ -123,6 +136,25 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
                  {link.name}
                </button>
             ))}
+          </div>
+          
+          <div className="flex flex-col gap-4 mt-auto pb-12">
+            <Button 
+              variant="outline" 
+              fullWidth
+              className="border-red-500/30 text-red-400 py-6"
+              onClick={openScanner}
+            >
+              <Zap className="w-5 h-5 mr-2" />
+              SCANNER DE GATILHOS
+            </Button>
+            <Button 
+              variant="secondary"
+              fullWidth
+              className="py-6"
+            >
+              Começar agora
+            </Button>
           </div>
         </div>
       </div>
