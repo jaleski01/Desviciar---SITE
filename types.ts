@@ -4,10 +4,14 @@ import { LucideIcon } from 'lucide-react';
 export interface Plan {
   name: string;
   price: string;
+  oldPrice?: string; // Ex: "DE R$ 1.200"
+  periodicity?: string; // Ex: "/mês" ou "ÚNICO"
   description: string;
   features: string[];
   notIncluded?: string[];
   highlight?: boolean;
+  badge?: string; // Texto do badge superior (ex: "APENAS 60 VAGAS...")
+  badgeColor?: 'red' | 'purple'; // Cor do badge
   cta: string;
   checkoutUrl?: string;
 }

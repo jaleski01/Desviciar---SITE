@@ -8,7 +8,6 @@ const Pricing: React.FC = () => {
     if (url) {
       window.open(url, '_blank');
     } else {
-      // Fallback scroll to contact or default behavior if no link provided yet
       console.log("No specific link for this plan yet.");
     }
   };
@@ -28,41 +27,48 @@ const Pricing: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-8 items-stretch mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-stretch mb-20 max-w-5xl mx-auto">
           {PLANS.map((plan) => (
             <div 
               key={plan.name} 
               className={`relative flex flex-col p-10 lg:p-12 rounded-[3.5rem] border transition-all duration-700 ${
                 plan.highlight 
                   ? 'bg-[#0b101b] border-purple-500/50 shadow-[0_40px_100px_-20px_rgba(147,51,234,0.3)] scale-[1.02] z-10' 
-                  : plan.name.includes('SCARX')
-                  ? 'bg-[#0f0a1e] border-indigo-500/30 shadow-[0_40px_100px_-20px_rgba(79,70,229,0.15)]'
+                  : plan.badgeColor === 'red'
+                  ? 'bg-[#080c14] border-red-500/10 hover:border-red-500/30'
                   : 'bg-[#080c14] border-white/5 hover:border-purple-500/30'
               }`}
             >
-              {plan.highlight && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <span className="bg-purple-600 text-white text-[10px] font-black px-6 py-2.5 rounded-full uppercase tracking-[0.3em] shadow-2xl inline-flex items-center gap-2 whitespace-nowrap">
-                    <Star size={12} className="fill-white" /> PROTOCOLO COMPLETO
-                  </span>
-                </div>
-              )}
-
-              {plan.name.includes('SCARX') && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <span className="bg-indigo-600 text-white text-[10px] font-black px-6 py-2.5 rounded-full uppercase tracking-[0.3em] shadow-2xl inline-flex items-center gap-2 whitespace-nowrap">
-                    <Crown size={12} className="fill-white" /> ACELERAÇÃO TOTAL
+              {plan.badge && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                  <span className={`${
+                    plan.badgeColor === 'red' 
+                      ? 'bg-red-900/80 text-red-200 border-red-500/30' 
+                      : 'bg-purple-600 text-white shadow-2xl'
+                  } text-[10px] font-black px-6 py-2.5 rounded-full uppercase tracking-[0.2em] border inline-flex items-center gap-2 whitespace-nowrap shadow-xl backdrop-blur-md`}>
+                    {plan.badge}
                   </span>
                 </div>
               )}
 
               <div className="mb-10 text-left">
                 <h3 className="text-2xl font-display font-black text-white mb-4 uppercase tracking-widest leading-none">{plan.name}</h3>
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-5xl lg:text-6xl font-display font-black text-white">{plan.price}</span>
-                  {plan.name === 'RESTART' && <span className="text-gray-600 text-xs font-black uppercase tracking-widest">/mês</span>}
+                
+                <div className="flex flex-col mb-6">
+                  {plan.oldPrice && (
+                    <span className="text-xs font-bold text-gray-500 line-through mb-1 uppercase tracking-widest">{plan.oldPrice}</span>
+                  )}
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl lg:text-6xl font-display font-black text-white">{plan.price}</span>
+                    {plan.periodicity && (
+                      <span className={`text-xs font-black uppercase tracking-widest ${plan.periodicity === 'ÚNICO' ? 'text-purple-400' : 'text-gray-600'}`}>
+                        {plan.periodicity}
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <p className="text-gray-500 text-sm font-light leading-relaxed min-h-[50px]">{plan.description}</p>
+
+                <p className="text-white text-sm font-medium leading-relaxed min-h-[50px]">{plan.description}</p>
               </div>
 
               <div className="flex-1 space-y-4 mb-12">
@@ -70,7 +76,7 @@ const Pricing: React.FC = () => {
                   <div key={idx} className="flex items-start gap-4">
                     <div className={`mt-1 shrink-0 w-5 h-5 rounded-lg flex items-center justify-center ${
                       plan.highlight ? 'bg-purple-500/20 text-purple-400' : 
-                      plan.name.includes('SCARX') ? 'bg-indigo-500/20 text-indigo-400' : 'bg-white/5 text-gray-500'
+                      plan.badgeColor === 'red' ? 'bg-red-500/10 text-red-400' : 'bg-white/5 text-gray-500'
                     }`}>
                       <Check size={12} strokeWidth={4} />
                     </div>
@@ -86,8 +92,8 @@ const Pricing: React.FC = () => {
                 className={`h-20 w-full rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-300 flex items-center justify-center ${
                   plan.highlight 
                     ? '!bg-purple-600 !text-white shadow-[0_20px_40px_rgba(147,51,234,0.3)] hover:!bg-purple-500' 
-                    : plan.name.includes('SCARX') 
-                      ? '!bg-indigo-600 !text-white border-none shadow-[0_20px_40px_rgba(79,70,229,0.3)] hover:!bg-indigo-500' 
+                    : plan.badgeColor === 'red'
+                      ? 'bg-red-600/10 border border-red-500/20 text-red-500 hover:bg-red-600 hover:text-white hover:shadow-[0_20px_40px_rgba(239,68,68,0.2)]'
                       : 'bg-transparent border border-white/10 text-white hover:bg-white/5 hover:border-purple-500/50'
                 }`}
               >

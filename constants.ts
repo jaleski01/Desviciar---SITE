@@ -10,15 +10,15 @@ import { Testimonial, FeatureItem, FAQItem, Plan, Achievement, Benefit, BlogPost
 export const PRODUCT_PILLARS = [
   {
     id: 'dashboard',
-    title: "Painel de Energia e Foco",
-    description: "Monitore sua química cerebral em tempo real através do aplicativo DeSync. Visualize como sua clareza mental retorna conforme você avança no protocolo.",
+    title: "SISTEMA DE COMANDO TÁTICO",
+    description: "Monitore sua química cerebral em tempo real através do DeSync. Visualize como sua clareza mental retorna conforme você avança no protocolo de desviciamento.",
     image: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=1000",
     align: 'right' as const
   },
   {
     id: 'scanner',
-    title: "Scanner de Gatilhos",
-    description: "Identifique padrões de comportamento antes que eles se tornem quedas. Uma ferramenta de engenharia reversa para desativar impulsos digitais.",
+    title: "SCANNER DE GATILHOS",
+    description: "Identifique padrões de comportamento antes que eles se tornem quedas. Uma ferramenta de engenharia reversa para desativar impulsos digitais e blindar sua mente.",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
     align: 'left' as const
   }
@@ -86,48 +86,40 @@ export const FAQS: FAQItem[] = [
 
 export const PLANS: Plan[] = [
   {
-    name: "RESTART",
-    price: "R$ 47",
-    description: "Resgate Tático imediato com acesso ao aplicativo DeSync para interromper as quedas.",
+    name: "STARTER RESTART",
+    price: "R$ 29,90",
+    periodicity: "/mês",
+    description: "Acesso tático mensal ao ecossistema DeSync. Plano promocional limitado.",
+    badge: "APENAS 60 VAGAS DISPONÍVEIS",
+    badgeColor: "red",
     features: [
-      "Acesso mensal ao App DeSync",
-      "Painel de comando de evolução",
+      "App DeSync (Mensal)",
+      "Painel de Evolução",
       "Botão de Pânico SOS",
-      "Comunidade 100% anônima",
-      "Scanner de gatilhos básico"
+      "Comunidade Anônima",
+      "Mapeamento de Gatilhos"
     ],
-    cta: "Iniciar Restart",
-    checkoutUrl: "https://buy.stripe.com/9B6aEQ5Kl9nE3wH1QYbjW06"
-  },
-  {
-    name: "REPROGRAMAÇÃO",
-    price: "R$ 267",
-    description: "Método 90 dias: Masterclass com 50+ aulas, Bloqueio DNS e suporte estratégico para erradicar o vício.",
-    highlight: true,
-    features: [
-      "Acesso ao App DeSync (90 dias)",
-      "Masterclass: 50+ aulas exclusivas",
-      "Método 100% Intelectual e Científico",
-      "Escudo de Bloqueio DNS Ativo",
-      "Comunidade Elite de Suporte",
-      "Mapeamento avançado de gatilhos"
-    ],
-    cta: "COMEÇAR PROTOCOLO 90 DIAS",
-    checkoutUrl: "https://buy.stripe.com/00w7sEb4F43kaZ9dzGbjW07"
+    cta: "GARANTIR VAGA",
+    checkoutUrl: "https://buy.stripe.com/fZufZa4Gh2Zg4ALbrybjW0a"
   },
   {
     name: "NEW LIFE SCARX",
-    price: "R$ 697",
-    description: "Reconstrução Total: 1 ano de DeSync blindado mais 3 meses de Revitalização Física de elite ScarX.",
+    price: "R$ 479",
+    oldPrice: "DE R$ 1.200",
+    periodicity: "ÚNICO",
+    description: "O Combo Elite: Inclui TUDO do Starter + Protocolo 90 Dias + Consultoria ScarX.",
+    badge: "★ SOLUÇÃO DEFINITIVA",
+    badgeColor: "purple",
+    highlight: true,
     features: [
-      "Acesso anual ao App DeSync",
-      "3 meses de revitalização física (SCARX)",
-      "Time: personal, nutri, fisio e psi",
+      "Tudo do Plano Starter (Vitalício)",
+      "Masterclass: 50+ aulas exclusivas",
+      "Consultoria ScarX (3 meses)",
+      "Escudo de Bloqueio DNS Ativo",
       "Acompanhamento Concierge ScarX",
-      "Escudo de Bloqueio DNS Premium",
       "Masterclasses Vitalícias"
     ],
-    cta: "Garantir New Life",
+    cta: "GARANTIR NEW LIFE",
     checkoutUrl: "https://buy.stripe.com/6oUaEQ5Kl7fw3wHgLSbjW08"
   }
 ];
@@ -135,23 +127,23 @@ export const PLANS: Plan[] = [
 export const EXPERTS: Expert[] = [
   {
     name: "João Scar",
-    role: "Fundador da ScarX e Desviciar",
-    description: "Treinador do Peter Jordan focado em reestruturação de rotina e hábitos para alta performance. Aplico metodologias de elite para garantir que sua envergadura intelectual se traduza em um novo padrão de vida duradouro e definitivo.",
+    role: "O Arquiteto da Mudança",
+    description: "Estrategista focado em alta performance. Como treinador de personalidades como Peter Jordan, Scar desenhou o protocolo de desviciamento para ser uma máquina de reestruturação de hábitos e força de vontade.",
     stats: [
       { label: "Performance", value: "Elite Trainer" },
-      { label: "Membros", value: "1200+ Aluno" }
+      { label: "Membros", value: "1.2k+ Alunos" }
     ],
     image: "https://scarx.com.br/images/scarterno2.jpeg"
   },
   {
-    name: "Grace",
-    role: "Psicanalista Comportamental",
-    description: "Especialista em vícios de alta complexidade. Com vasta experiência clínica, adaptou protocolos de resgate tático para o método Desviciar, combatendo a epidemia de vícios digitais moderna através da reprogramação psíquica profunda.",
+    name: "Grace Tomal",
+    role: "Estrategista Psicológica",
+    description: "Psicanalista especialista em vícios de alta complexidade. Grace adaptou os protocolos de resgate tático para o ambiente digital, permitindo uma reprogramação química e psíquica sem precedentes.",
     stats: [
       { label: "Atendimentos", value: "500+" },
-      { label: "Experiência", value: "12 anos" }
+      { label: "Formação", value: "Psicanálise" }
     ],
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000"
+    image: "https://i.imgur.com/QaC5B4n.png"
   }
 ];
 
@@ -166,7 +158,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     user: "u/Lucas90D",
     title: "O método científico funciona",
-    content: "A Masterclass me fez entender por que eu caía. When you understand biology, addiction loses its strength. 45 days clean.",
+    content: "A Masterclass me fez entender por que eu caía. Quando você entende a biologia, o vício perde a força. 45 dias limpo.",
     streakDay: 45,
     platform: 'reddit'
   },
@@ -178,6 +170,8 @@ export const TESTIMONIALS: Testimonial[] = [
     platform: 'reddit'
   }
 ];
+
+export const EXPERTS_LIST = EXPERTS; // Alias for backward compatibility if needed
 
 export const ACHIEVEMENTS: Achievement[] = [
   { name: "Semente", level: "0-7 DIAS", color: "from-gray-400 to-gray-600" },
