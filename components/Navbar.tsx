@@ -83,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
           </div>
 
           <div className="hidden lg:flex items-center gap-6">
-            <a href="#" className="text-[12px] font-bold text-gray-400 hover:text-white transition-colors">
+            <a href="https://www.scardsvc.com" className="text-[12px] font-bold text-gray-400 hover:text-white transition-colors">
               Login
             </a>
             <Button 
