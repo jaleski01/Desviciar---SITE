@@ -1,10 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import FeatureGrid from './components/FeatureGrid';
 import Testimonials from './components/Testimonials';
-import Experts from './components/Experts';
+import AudioTestimony from './components/AudioTestimony';
+import MissionMilestone from './components/MissionMilestone';
+import ArchitectCard from './components/ArchitectCard';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import BlogPreview from './components/BlogPreview';
@@ -33,13 +34,34 @@ function App() {
       <main>
         {currentView === 'home' ? (
           <>
+            {/* 1. Hero: O Hook Visual (iPhone Simulator) */}
             <Hero />
+            
+            {/* 2. Mission: O Movimento e Meta Social */}
+            <MissionMilestone />
+            
+            {/* 3. Features: O Sistema Tático (Bento Grid) */}
             <FeatureGrid />
-            <Experts /> 
-            <Testimonials />
-            <BlogPreview onSelectArticle={setSelectedArticle} />
+            
+            {/* 4. Architect: A Autoridade (João Scar) */}
+            <ArchitectCard />
+            
+            {/* 5. Logic: O Custo Biológico (A Ciência) */}
             <BiologicalCost /> 
+            
+            {/* 6. Proof: Social (Reddit style) */}
+            <Testimonials />
+            
+            {/* 7. Proof: Human (Audio Voice Notes) */}
+            <AudioTestimony />
+            
+            {/* 8. Education: Blog/Recursos */}
+            <BlogPreview onSelectArticle={setSelectedArticle} />
+            
+            {/* 9. Offer: Planos Elite */}
             <Pricing />
+            
+            {/* 10. Support: FAQ */}
             <FAQ />
           </>
         ) : (
